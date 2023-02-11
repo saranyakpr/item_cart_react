@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "../../../router/rounter"
+		},
+		{
+			"path": "../../../practice-01"
+		},
+		{
+			"path": "../../../Facebook"
+		},
+		{
+			"path": "../../../sample_react"
+		},
+		{
+			"path": "../.."
+		}
+	],
+	"settings": {}
+}
