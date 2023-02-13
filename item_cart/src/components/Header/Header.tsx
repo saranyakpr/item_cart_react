@@ -9,10 +9,19 @@ import Search from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import { useNavigate } from 'react-router-dom';
+import Badge from '@mui/material/Badge';
+import MailIcon from '@mui/icons-material/Mail';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { useSelector } from 'react-redux';
+import './Header.scss'
 
 const Header = () => {
 
+  const state = useSelector(({sample}:any)=>sample)
+
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    const navigate  = useNavigate();
 
     const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -22,6 +31,16 @@ const Header = () => {
         setAnchorEl(null);
       };
     
+      const goToMyFav = () =>{
+        handleClose();
+        navigate('/favorite')
+      }
+
+      const goToMyCart = () =>{
+        handleClose();
+        navigate('/cart')
+      }
+
   return (
     <Box sx={{ flexGrow: 1 }}>
     <AppBar position="fixed">
@@ -40,8 +59,10 @@ const Header = () => {
           noWrap
           component="div"
           sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+          onClick={()=>navigate('/product')}
+          className='name'
         >
-          MUI
+          Fruit shop
         </Typography>
         <Search>
           <SearchIconWrapper>
@@ -49,9 +70,13 @@ const Header = () => {
           </SearchIconWrapper>
           <StyledInputBase
             placeholder="Search…"
-            inputProps={{ 'aria-label': 'search' }}
-          />
+            inputProps={{ 'aria-label': 'search' }}/>
         </Search>
+        <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={()=>navigate('/cart')}>
+          <Badge badgeContent={state?.cartItems?.length} color="error">
+            <ShoppingCartIcon />
+          </Badge>
+        </IconButton>
         <div>
               <IconButton
                 size="large"
@@ -80,8 +105,8 @@ const Header = () => {
               >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleClose}>My account</MenuItem>
-                <MenuItem onClick={handleClose}>Cart</MenuItem>
-                <MenuItem onClick={handleClose}>My Favorite</MenuItem>
+                <MenuItem onClick={goToMyCart}>Cart</MenuItem>
+                <MenuItem onClick={goToMyFav}>My Favorite</MenuItem>
               </Menu>
             </div>
       </Toolbar>

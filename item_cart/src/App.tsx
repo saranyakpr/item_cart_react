@@ -25,8 +25,8 @@ function Routing(){
               <Route path='/favorite'  element={<Favorite/>}></Route>
               <Route path='/cart'  element={<Cart/>}></Route>
               <Route path='*'  element={<Navigate to='/'/>}></Route>
-            </Routes>
-            </div>
+          </Routes>
+          </div>
           </>
           ):( 
           <Routes>
